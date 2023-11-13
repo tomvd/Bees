@@ -1,0 +1,19 @@
+vision:
+- keep it simple, no breeding, no queen collecting, no wax or other side products except for mead, using simple fermenting barrel
+- plants work for the bees (more plants=better hive growth), bees work for the plants (plants in the area benefit from the hive) and for you (honey)
+- only 1 "new" mechanic: a hive is an (super)organism so it has a growth cycle where it will fully productive at 100%. When the hive is not resting (temperature), it is growing.
+Factors that affect growth positive: plants around the hive (any plant will do). Other hives too close decrease growth. Toxic fallout and pollution causes negative growth. When temperature is too low, there also is a small decline in growth.
+reason is that the effect on plants would otherwise be instant and overpowered.   
+- honey is like insect jelly, but it has an amazing effect on infections/immunity when ingested - as a result also much more valueable for selling to traders
+
+- incompatible mods are all mods that already have their own bee/hive/honey thing going on: alpha bees, misc bees'n'honey, VFE-Vikings, Medieval Overhaul, ...
+
+
+taken ideas:
+- from alpha bees: create growing zone gizmo
+- from VFE-Vikings: apiary building (with modified texture) + building placementworker + fermenting barrel
+- from misc bees'n'honey: the plant counter, which can go over its ideal amount
+
+nice to haves:
+- hive growth is shown in different textures
+- sound and visuals (motes) of bees around an active hive
