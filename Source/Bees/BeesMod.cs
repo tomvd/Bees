@@ -1,5 +1,3 @@
-using HarmonyLib;
-using PlantGenetics;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -32,17 +30,12 @@ public static class InternalDefOf
 
 public class BeesMod : Mod
 {
-	public static Harmony harmonyInstance;
 	public static Settings Settings;
 	
 	public BeesMod(ModContentPack content) : base(content)
 	{
 		Settings = GetSettings<Settings>();
-		//Log.Message("PlantGeneticsMod:start ");
-		harmonyInstance = new Harmony("Adamas.PlantGenetics");
-		harmonyInstance.PatchAll();        
-        
-    }
+	}
 	
 	/// <summary>
     /// The (optional) GUI part to set your settings.

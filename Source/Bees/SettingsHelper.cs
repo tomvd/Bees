@@ -5,7 +5,7 @@ using Verse;
 
 namespace VendingMachines;
 
-    //thanks to AlexTD for the below code!
+//thanks to AlexTD for the below code!
 internal static class SettingsHelper
 {
     //private static float gap = 12f;

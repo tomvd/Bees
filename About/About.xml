@@ -3,19 +3,16 @@
 	<name>Bees</name>
 	<author>Adamas</author>
 	<packageId>Adamas.Bees</packageId>
-	<url>todo</url>
+	<url>https://steamcommunity.com/sharedfiles/filedetails/?id=3090186019</url>
 	<supportedVersions>
 		<li>1.4</li>
 	</supportedVersions>
 	<description>
 		Build hives. Attract bees. Profit!
 	</description>
-	<modDependencies>
-		<li>
-			<packageId>brrainz.harmony</packageId>
-			<displayName>Harmony</displayName>
-			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
-			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
-		</li>	
-	</modDependencies>
+	<incompatibleWith>
+		<li>sarg.rimbees</li>
+		<li>Haplo.Miscellaneous.BeesNHoney</li>
+		<li>OskarPotocki.VFE.Vikings</li>
+	</incompatibleWith>	
 </ModMetaData>

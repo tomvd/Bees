@@ -3,8 +3,8 @@
 
     <ThingDef ParentName="OrganicProductBase">
         <defName>Bees_Honey</defName>
-        <label>raw honey</label>
-        <description>Raw, unprocessed honey harvested from an apiary, very sugary and fun to eat while also extremely long-lasting, perfect for taking on caravan trips, fermenting into mead, or baking into desserts.</description>
+        <label>honey</label>
+        <description>Honey harvested from a beehive. Very sugary and fun to eat while also extremely long-lasting, perfect for taking on caravan trips or fermenting into mead.</description>
         <graphicData>
             <texPath>Things/Item/Resource/AnimalProductRaw/Honey</texPath>
             <graphicClass>Graphic_StackCount</graphicClass>

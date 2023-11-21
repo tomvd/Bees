@@ -18,8 +18,8 @@ public class Beehive : Building
     private bool toomany;
     private bool forceHoneyRemoval;
 
-    private static float honeyPerHour = 0.5f; // amount of honey a perfect hive makes per hour - 0.5 on 12h/day active means 6 honey/day or a full stack for a season
-    private static float growthPerHour = 0.02f; // how much a hive grows per hour when active - 2% on 12h/day active means full hive in about 4-5 days
+    private static float honeyPerTenthHour = 0.05f; // amount of honey a perfect hive makes per 1/10 of an hour - 0.5/h on 12h/day active means 6 honey/day or a full stack for a season
+    private static float growthPerTenthHour = 0.002f; // how much a hive grows per 1/10th of an hour when active - 2%/h on 12h/day active means full hive in about 4-5 days
     private static float plantGrowthMultiplier = 0.5f; // 0f is normal growth, 1f is twice the growth
     
     
@@ -65,21 +65,21 @@ public class Beehive : Building
             unhealthy = Rand.Chance(0.0001f);
         if (active)
         {
-            honeyAmount += flowerPercentage * size * (toomany?honeyPerHour/2f:honeyPerHour);
+            honeyAmount += flowerPercentage * size * (toomany?honeyPerTenthHour/2f:honeyPerTenthHour);
             honeyAmount = Mathf.Clamp(honeyAmount, 0.0f, 75.0f);
             if (!unhealthy)
-                size += (toomany?growthPerHour/2f:growthPerHour);
+                size += (toomany?growthPerTenthHour/2f:growthPerTenthHour);
         }
         else
         {
             hoursInactive += 0.1f;
             if (hoursInactive > 12f)
             {
-                honeyAmount -= honeyPerHour/20f;
+                honeyAmount -= honeyPerTenthHour/20f;
                 honeyAmount = Mathf.Clamp(honeyAmount, 0.0f, 75.0f);
                 if (honeyAmount < 0.01f)
                 {
-                    size -= growthPerHour/20f;
+                    size -= growthPerTenthHour/20f;
                 }
             }
         }
@@ -136,14 +136,29 @@ public class Beehive : Building
     {
         active = false;
         if (flowerPercentage < 0.001f) inactiveReason = "no flowers"; 
-        else if (Map.GameConditionManager.ConditionIsActive(GameConditionDefOf.ToxicFallout)) inactiveReason = "toxic fallout";
+        else if (Map.GameConditionManager.ConditionIsActive(GameConditionDefOf.ToxicFallout) && IsOutdoors()) inactiveReason = "toxic fallout";
         else if (AmbientTemperature < 10) inactiveReason = "too cold";
-        else if (Map.weatherManager.RainRate >= 0.01f) inactiveReason = "rainy";
+        else if (Map.weatherManager.RainRate >= 0.01f && IsOutdoors()) inactiveReason = "rainy";
         else if (Map.glowGrid.GameGlowAt(Position) < 0.51f) inactiveReason = "too dark";
         else {
             active = true;
             hoursInactive = 0f;
         }
+    }
+
+    private bool IsOutdoors()
+    {
+        if (Position.UsesOutdoorTemperature(Map))
+        {
+            return true;
+        }
+        RoofDef roofDef = Map.roofGrid.RoofAt(Position);
+        if (roofDef == null)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public Thing TakeOutHoney()
@@ -227,9 +242,11 @@ public class Beehive : Building
             yield return new Command_Action
             {
                 defaultLabel = "Force honey harvest",
+                icon = ContentFinder<Texture2D>.Get($"UI/HarvestHoney"),
                 action = delegate()
                 {
                     this.forceHoneyRemoval = true;
+                    
                 }
             };
         }

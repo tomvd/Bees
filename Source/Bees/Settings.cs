@@ -1,7 +1,7 @@
 using UnityEngine;
 using Verse;
 
-namespace PlantGenetics;
+namespace Bees;
 
 public class Settings : ModSettings
 {

@@ -1,10 +1,11 @@
 vision:
-- keep it simple, no breeding, no queen collecting, no wax or other side products except for mead, using simple fermenting barrel
+- no breeding, no queen collecting
 - plants work for the bees (more plants=better hive growth), bees work for the plants (plants in the area benefit from the hive) and for you (honey)
 - only 1 "new" mechanic: a hive is an (super)organism so it has a growth cycle where it will fully productive at 100%. When the hive is not resting (temperature), it is growing.
 Factors that affect growth positive: plants around the hive (any plant will do). Other hives too close decrease growth. Toxic fallout and pollution causes negative growth. When temperature is too low, there also is a small decline in growth.
 reason is that the effect on plants would otherwise be instant and overpowered.   
-- honey is like insect jelly, but it has an amazing effect on infections/immunity when ingested - as a result also much more valueable for selling to traders
+- honey 
+- propolis
 
 - incompatible mods are all mods that already have their own bee/hive/honey thing going on: alpha bees, misc bees'n'honey, VFE-Vikings, Medieval Overhaul, ...
 
@@ -17,3 +18,24 @@ taken ideas:
 nice to haves:
 - hive growth is shown in different textures
 - sound and visuals (motes) of bees around an active hive
+
+text:
+Bees is a mod created by a beekeeper and tries to recreate the essence of the beekeeping. A symbiosis between plants and bees that live a hive that grows and shrinks.
+After researching beekeeping you can build a starter hive. If there are enough mature plants (growth>50%) around it and the weather is fine the hive will grow. 
+You will eventually notice a boost in the growth of the plants around it. And the hive will gather honey. The speed of both depend on the hive's size.
+A full size hive can double plants growth and yield 1 honey every 2 in-game hours!
+
+Beware that if the weather gets worse (low temperature, long periods of rain or a toxic fallout) the hive will first consume their honey and then will shrink again.
+Also a hive can get sick once in a while and needs tending in such a case to be able to be fully functional again.
+
+Honey is a nice food product, just raw it is fun and safe to eat while also extremely long-lasting.
+
+After researching mead brewing, you can build a mead fermenting barrel to ferment your honey into mead as an alternative to beer with very similar properties.
+
+After researching propolis extraction, with each honey harvest there is a chance to get some propolis. 
+Propolis has antibacterial, antiviral and anti-inflammatory properties, both preventive and curative. So a very powerful medicine you can almost get for free.
+
+At the moment it is incompatible with other mods that add honey. I probably make it compatible with Medieval Overhaul at some point.
+TODO: other graphic for mead fermenting barrel and higher quantities of honey, propolis and mead
+
+Idea to start with this mod: JustNotEnough on the Rimworld discord channel

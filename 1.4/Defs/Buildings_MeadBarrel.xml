@@ -36,8 +36,8 @@
   </costList>
   <comps>
     <li Class="CompProperties_TemperatureRuinable">
-      <minSafeTemperature>-1</minSafeTemperature>
-      <maxSafeTemperature>32</maxSafeTemperature>
+      <minSafeTemperature>0</minSafeTemperature>
+      <maxSafeTemperature>40</maxSafeTemperature>
       <progressPerDegreePerTick>0.00001</progressPerDegreePerTick>
     </li>
   </comps>

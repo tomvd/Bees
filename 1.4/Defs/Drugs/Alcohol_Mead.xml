@@ -5,6 +5,7 @@
     <defName>Bees_Mead</defName>
     <label>mead</label>
     <description>An alcoholic beverage made by fermenting honey mixed with water.</description>
+    <possessionCount>6</possessionCount>
     <graphicData>
       <texPath>Things/Item/Drugs/Mead</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
@@ -18,7 +19,7 @@
       <MarketValue>12</MarketValue>
       <Mass>0.3</Mass>
       <Flammability>0.5</Flammability>
-      <Nutrition>0.08</Nutrition>
+      <Nutrition>0.09</Nutrition>
     </statBases>
 
     <ingestible>
@@ -39,12 +40,12 @@
       <outcomeDoers>
         <li Class="IngestionOutcomeDoer_GiveHediff">
           <hediffDef>AlcoholHigh</hediffDef>
-          <severity>0.14</severity>
+          <severity>0.13</severity>
           <toleranceChemical>Alcohol</toleranceChemical>
         </li>
         <li Class="IngestionOutcomeDoer_GiveHediff">
           <hediffDef>AlcoholTolerance</hediffDef>
-          <severity>0.015</severity>
+          <severity>0.014</severity>
           <divideByBodySize>true</divideByBodySize>
         </li>
       </outcomeDoers>
@@ -53,14 +54,11 @@
     <comps>
       <li Class="CompProperties_Drug">
         <chemical>Alcohol</chemical>
-        <addictiveness>0.010</addictiveness>
+        <addictiveness>0.009</addictiveness>
         <minToleranceToAddict>0.25</minToleranceToAddict>
         <existingAddictionSeverityOffset>0.20</existingAddictionSeverityOffset>
         <needLevelOffset>1</needLevelOffset>
         <listOrder>10</listOrder>
-      </li>
-      <li>
-        <compClass>CompEquippable</compClass>
       </li>
     </comps>
     <researchPrerequisites>

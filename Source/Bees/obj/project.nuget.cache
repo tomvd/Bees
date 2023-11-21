@@ -1,12 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "FdYFzXxOAGfwCmcft5iprV4fawZt5B+hiSSpfwiteqMGRinG4wvc+N6XEeZH38JwKKjdn8q1WjKYjPxATilG8Q==",
+  "dgSpecHash": "XGClIif44UstZeuWSQ4UbdzBB/MB/hyjfLsLzAq6yuJ8aRYrE8LWTiFmuGuT5CH3fq2LlzNl8MIz6B5CkO/eaA==",
   "success": true,
   "projectFilePath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\Bees\\Source\\Bees\\Bees.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tomvd\\.nuget\\packages\\krafs.publicizer\\1.0.3\\krafs.publicizer.1.0.3.nupkg.sha512",
-    "C:\\Users\\tomvd\\.nuget\\packages\\krafs.rimworld.ref\\1.4.3704\\krafs.rimworld.ref.1.4.3704.nupkg.sha512",
-    "C:\\Users\\tomvd\\.nuget\\packages\\lib.harmony\\2.2.2\\lib.harmony.2.2.2.nupkg.sha512"
+    "C:\\Users\\tomvd\\.nuget\\packages\\krafs.rimworld.ref\\1.4.3901\\krafs.rimworld.ref.1.4.3901.nupkg.sha512"
   ],
   "logs": []
 }

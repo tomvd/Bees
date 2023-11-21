@@ -29,7 +29,7 @@ public class WorkGiver_FillMeadFermentingBarrel : WorkGiver_Scanner
 		}
 		float ambientTemperature = building_FermentingBarrel.AmbientTemperature;
 		CompProperties_TemperatureRuinable compProperties = building_FermentingBarrel.def.GetCompProperties<CompProperties_TemperatureRuinable>();
-		if (ambientTemperature < compProperties.minSafeTemperature + 2f || ambientTemperature > compProperties.maxSafeTemperature - 2f)
+		if (ambientTemperature < compProperties.minSafeTemperature + 1f || ambientTemperature > compProperties.maxSafeTemperature - 1f)
 		{
 			JobFailReason.Is(TemperatureTrans);
 			return false;
