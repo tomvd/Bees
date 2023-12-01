@@ -1,4 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Configuration>
-  <Excluded />
+  <Excluded>
+    <exclude>.git</exclude>
+    <exclude>About\ideas.txt</exclude>
+    <exclude>About\preview.afdesign</exclude>
+    <exclude>Source</exclude>
+    <exclude>Textures\Things\Building\Production\Beehive.afdesign</exclude>
+    <exclude>Textures\Things\Building\Production\Beehive2.afdesign</exclude>
+    <exclude>Textures\Things\Item\Drugs\Mead\Mead_a.afdesign</exclude>
+    <exclude>Textures\Things\Item\Drugs\Propolis\Propolis_a.afdesign</exclude>
+    <exclude>Textures\Things\Item\Resource\AnimalProductRaw\Honey\Honey_a.afdesign</exclude>
+    <exclude>Textures\Things\Item\Resource\AnimalProductRaw\Honey\Honey_b.afdesign</exclude>
+    <exclude>Textures\Things\Item\Resource\AnimalProductRaw\Honey\Honey_c.afdesign</exclude>
+    <exclude>Textures\UI\HarveHoney.afdesign</exclude>
+  </Excluded>
 </Configuration>
