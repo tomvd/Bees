@@ -7,7 +7,7 @@
     <description>An alcoholic beverage made by fermenting honey mixed with water.</description>
     <possessionCount>6</possessionCount>
     <graphicData>
-      <texPath>Things/Item/Drugs/Mead</texPath>
+      <texPath>Things/Item/Drugs/BeesMead</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
     </graphicData>
     <equippedAngleOffset>-150</equippedAngleOffset>

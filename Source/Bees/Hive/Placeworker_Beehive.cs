@@ -19,7 +19,6 @@ public class Placeworker_Beehive : PlaceWorker
                 }
             }
         }
-        if (center.Roofed(map)) return "APlaceWorkerNoRoof".Translate();
         return true;
     }
 }
