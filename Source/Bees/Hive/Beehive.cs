@@ -139,7 +139,7 @@ public class Beehive : Building
         else if (Map.GameConditionManager.ConditionIsActive(GameConditionDefOf.ToxicFallout) && IsOutdoors()) inactiveReason = "toxic fallout";
         else if (AmbientTemperature < 10) inactiveReason = "too cold";
         else if (Map.weatherManager.RainRate >= 0.01f && IsOutdoors()) inactiveReason = "rainy";
-        else if (Map.glowGrid.GameGlowAt(Position) < 0.51f) inactiveReason = "too dark";
+        else if (Map.glowGrid.GroundGlowAt(Position) < 0.51f) inactiveReason = "too dark";
         else {
             active = true;
             hoursInactive = 0f;

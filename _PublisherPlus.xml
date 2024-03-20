@@ -7,11 +7,11 @@
     <exclude>Source</exclude>
     <exclude>Textures\Things\Building\Production\Beehive.afdesign</exclude>
     <exclude>Textures\Things\Building\Production\Beehive2.afdesign</exclude>
-    <exclude>Textures\Things\Item\Drugs\Mead\Mead_a.afdesign</exclude>
+    <exclude>Textures\Things\Item\Drugs\BeesMead\Mead_a.afdesign</exclude>
     <exclude>Textures\Things\Item\Drugs\Propolis\Propolis_a.afdesign</exclude>
-    <exclude>Textures\Things\Item\Resource\AnimalProductRaw\Honey\Honey_a.afdesign</exclude>
-    <exclude>Textures\Things\Item\Resource\AnimalProductRaw\Honey\Honey_b.afdesign</exclude>
-    <exclude>Textures\Things\Item\Resource\AnimalProductRaw\Honey\Honey_c.afdesign</exclude>
+    <exclude>Textures\Things\Item\Resource\AnimalProductRaw\BeesHoney\Honey_a.afdesign</exclude>
+    <exclude>Textures\Things\Item\Resource\AnimalProductRaw\BeesHoney\Honey_b.afdesign</exclude>
+    <exclude>Textures\Things\Item\Resource\AnimalProductRaw\BeesHoney\Honey_c.afdesign</exclude>
     <exclude>Textures\UI\HarveHoney.afdesign</exclude>
   </Excluded>
 </Configuration>

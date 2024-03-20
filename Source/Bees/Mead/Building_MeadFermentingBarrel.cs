@@ -214,9 +214,9 @@ public class Building_MeadFermentingBarrel : Building
 		return thing;
 	}
 
-	public override void Draw()
+	public override void DrawAt(Vector3 drawLoc, bool flip = false)
 	{
-		base.Draw();
+		base.DrawAt(drawLoc, flip);
 		if (!Empty)
 		{
 			Vector3 drawPos = DrawPos;
