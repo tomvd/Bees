@@ -2,6 +2,7 @@
 <Configuration>
   <Excluded>
     <exclude>.git</exclude>
+    <exclude>1.4\Assemblies\Bees.pdb</exclude>
     <exclude>About\ideas.txt</exclude>
     <exclude>About\preview.afdesign</exclude>
     <exclude>Source</exclude>
