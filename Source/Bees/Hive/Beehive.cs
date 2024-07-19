@@ -117,17 +117,17 @@ public class Beehive : Building
         {
             stringBuilder.AppendLine();
         }
-        stringBuilder.AppendLine("Size: " + size.ToStringPercent());
-        stringBuilder.AppendLine("Plants: " + flowerPercentage.ToStringPercent());
-        stringBuilder.AppendLine("Active: " + (active?"Yes":"No (" + inactiveReason +" "+ hoursInactive.ToStringDecimalIfSmall() + "h)"));
-        stringBuilder.AppendLine("Honey: " + honeyAmount.ToStringDecimalIfSmall());
+        stringBuilder.AppendLine("HiveInspectSize".Translate() + size.ToStringPercent());
+        stringBuilder.AppendLine("HiveInspectPlants".Translate() + flowerPercentage.ToStringPercent());
+        stringBuilder.AppendLine("HiveInspectActive".Translate() + (active?"Yes".Translate():"No".Translate()+" (" + inactiveReason +" "+ hoursInactive.ToStringDecimalIfSmall() + "h)"));
+        stringBuilder.AppendLine("HiveInspectHoney".Translate() + honeyAmount.ToStringDecimalIfSmall());
         if (toomany)
         {
-            stringBuilder.AppendLine("Beehives are too close together: production and growth is reduced.");
+            stringBuilder.AppendLine("HiveTooClose".Translate());
         }
         if (unhealthy)
         {
-            stringBuilder.AppendLine("Beehive is unhealthy: growth is reduced until tended.");
+            stringBuilder.AppendLine("HiveUnhealthy".Translate());
         }
         return stringBuilder.ToString().TrimEndNewlines();
     }
@@ -135,11 +135,11 @@ public class Beehive : Building
     private void RecalculateActive()
     {
         active = false;
-        if (flowerPercentage < 0.001f) inactiveReason = "no flowers"; 
-        else if (Map.GameConditionManager.ConditionIsActive(GameConditionDefOf.ToxicFallout) && IsOutdoors()) inactiveReason = "toxic fallout";
-        else if (AmbientTemperature < 10) inactiveReason = "too cold";
-        else if (Map.weatherManager.RainRate >= 0.01f && IsOutdoors()) inactiveReason = "rainy";
-        else if (Map.glowGrid.GroundGlowAt(Position) < 0.51f) inactiveReason = "too dark";
+        if (flowerPercentage < 0.001f) inactiveReason = "InActiveReasonNoFlowers".Translate(); 
+        else if (Map.GameConditionManager.ConditionIsActive(GameConditionDefOf.ToxicFallout) && IsOutdoors()) inactiveReason = "InActiveReasonToxic".Translate();
+        else if (AmbientTemperature < 10) inactiveReason = "InActiveReasonCold".Translate();
+        else if (Map.weatherManager.RainRate >= 0.01f && IsOutdoors()) inactiveReason = "InActiveReasonRainy".Translate();
+        else if (Map.glowGrid.GroundGlowAt(Position) < 0.51f) inactiveReason = "InActiveReasonDark".Translate();
         else {
             active = true;
             hoursInactive = 0f;
@@ -241,7 +241,7 @@ public class Beehive : Building
         {
             yield return new Command_Action
             {
-                defaultLabel = "Force honey harvest",
+                defaultLabel = "ForceHoneyHarvest".Translate(),
                 icon = ContentFinder<Texture2D>.Get($"UI/HarvestHoney"),
                 action = delegate()
                 {

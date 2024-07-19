@@ -2,4 +2,16 @@
 <LanguageData>
     <ContainsHoney>Contains honey</ContainsHoney>
     <ContainsMead>Contains mead</ContainsMead>
+    <ForceHoneyHarvest>Force honey harvest</ForceHoneyHarvest>
+    <HiveInspectSize>Size: </HiveInspectSize>
+    <HiveInspectPlants>Plants: </HiveInspectPlants>
+    <HiveInspectActive>Active: </HiveInspectActive>
+    <HiveInspectHoney>Honey: </HiveInspectHoney>
+    <HiveTooClose>Beehives are too close together: production and growth is reduced.</HiveTooClose>
+    <HiveUnhealthy>Beehive is unhealthy: growth is reduced until tended.</HiveUnhealthy>
+    <InActiveReasonNoFlowers>no flowers</InActiveReasonNoFlowers>
+    <InActiveReasonToxic>toxic fallout</InActiveReasonToxic>
+    <InActiveReasonCold>too cold</InActiveReasonCold>
+    <InActiveReasonRainy>rainy</InActiveReasonRainy>
+    <InActiveReasonDark>too dark</InActiveReasonDark>
 </LanguageData>

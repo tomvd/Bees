@@ -1,3 +1,5 @@
 is_global = true
 build_property.RootNamespace = Bees
 build_property.ProjectDir = C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Bees\Source\Bees\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
