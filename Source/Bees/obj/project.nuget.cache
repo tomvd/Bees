@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "tZhyqpO3mlHhz8Orj85u4uvdCoCSmw9EwHkCQkhZzs6AnKr43vzGZaBwdScuPUYnJmuULCa+N7qlUrPfnwLwqg==",
+  "dgSpecHash": "GtbDbqh2nHY=",
   "success": true,
   "projectFilePath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\Bees\\Source\\Bees\\Bees.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tomvd\\.nuget\\packages\\krafs.publicizer\\1.0.3\\krafs.publicizer.1.0.3.nupkg.sha512",
-    "C:\\Users\\tomvd\\.nuget\\packages\\krafs.rimworld.ref\\1.5.4039-beta\\krafs.rimworld.ref.1.5.4039-beta.nupkg.sha512"
+    "C:\\Users\\tomvd\\.nuget\\packages\\krafs.rimworld.ref\\1.6.4489-beta\\krafs.rimworld.ref.1.6.4489-beta.nupkg.sha512"
   ],
   "logs": []
 }

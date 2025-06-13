@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <ThingDef ParentName="DrugBase">
+        <defName>Bees_Propolis</defName>
+        <label>Propolis</label>
+        <description>Propolis has antibacterial, antiviral and anti-inflammatory properties, both preventive and curative. Preventive effect lasts 1 day.</description>
+        <researchPrerequisites>
+            <li>Bees_PropolisExtraction</li>
+        </researchPrerequisites>        
+        <graphicData>
+            <texPath>Things/Item/Drugs/Propolis</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+        </graphicData>
+        <socialPropernessMatters>false</socialPropernessMatters>
+        <rotatable>false</rotatable>
+        <statBases>
+            <MarketValue>2.75</MarketValue>
+            <!-- GP: 25 x 0.11 -->
+            <Mass>0.1</Mass>
+        </statBases>
+        <techLevel>Neolithic</techLevel>
+        <ingestible>
+            <foodType>AnimalProduct</foodType>
+            <drugCategory>Medical</drugCategory>
+            <chairSearchRadius>0</chairSearchRadius>
+            <ingestHoldUsesTable>false</ingestHoldUsesTable>
+            <maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
+            <preferability>NeverForNutrition</preferability>
+            <ingestHoldOffsetStanding>
+                <northDefault>
+                    <offset>(0.18,0,0)</offset>
+                </northDefault>
+            </ingestHoldOffsetStanding>            
+            <outcomeDoers>
+                <li Class="IngestionOutcomeDoer_GiveHediff">
+                    <hediffDef>Bees_PropolisHigh</hediffDef>
+                    <severity>1.0</severity>
+                </li>
+            </outcomeDoers>
+        </ingestible>
+        <comps>
+            <li Class="CompProperties_Drug">
+                <listOrder>3599</listOrder>
+                <overdoseSeverityOffset>
+                    <min>0.01</min>
+                    <max>0.03</max>
+                </overdoseSeverityOffset>
+            </li>
+        </comps>
+    </ThingDef>
+    <HediffDef>
+        <defName>Bees_PropolisHigh</defName>
+        <hediffClass>HediffWithComps</hediffClass>
+        <label>Propolis</label>
+        <description>Propolis effect</description>
+        <defaultLabelColor>(0.23, 0.64, 0.52)</defaultLabelColor>
+        <scenarioCanAdd>true</scenarioCanAdd>
+        <maxSeverity>1.0</maxSeverity>
+        <lethalSeverity>-1.0</lethalSeverity>
+        <isBad>false</isBad>
+        <comps>
+            <li Class="HediffCompProperties_SeverityPerDay">
+                <severityPerDay>-0.95</severityPerDay>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <lifeThreatening>false</lifeThreatening>
+                <statOffsets>
+                    <ToxicResistance>0.02</ToxicResistance>
+                </statOffsets>
+                <makeImmuneTo>
+                    <li>Malaria</li>
+                    <li>WoundInfection</li>
+                    <li>Asthma</li>
+                    <li>FoodPoisoning</li>
+                    <li>Flu</li>
+                </makeImmuneTo>
+                <capMods>
+                    <li>
+                        <capacity>BloodFiltration</capacity>
+                        <offset>0.1</offset>
+                    </li>
+                    <li>
+                        <capacity>BloodPumping</capacity>
+                        <offset>0.1</offset>
+                    </li>
+                    <li>
+                        <capacity>Breathing</capacity>
+                        <offset>0.10</offset>
+                    </li>                    
+                </capMods>
+            </li>
+        </stages>
+    </HediffDef>
+</Defs>

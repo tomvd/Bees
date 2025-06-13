@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <ResearchProjectDef>
+        <defName>Bees_Beekeeping</defName>
+        <label>bee keeping</label>
+        <description>Learn how to keep bees to produce honey from nearby plants.</description>
+        <baseCost>500</baseCost>
+		<tab>Bees</tab>
+        <techLevel>Neolithic</techLevel>
+        <researchViewX>0</researchViewX>
+        <researchViewY>0</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef>
+        <defName>Bees_MeadBrewing</defName>
+        <label>mead brewing</label>
+        <tab>Bees</tab>
+        <techLevel>Medieval</techLevel>
+        <description>Research mead brewing to be able to ferment a mixture of honey and water into mead. Mead is a mild alcoholic bewerage.</description>
+        <baseCost>400</baseCost>
+        <prerequisites>
+            <li>Bees_Beekeeping</li>
+            <li>Brewing</li>
+        </prerequisites>
+        <researchViewX>1</researchViewX>
+        <researchViewY>0</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef>
+        <defName>Bees_PropolisExtraction</defName>
+        <label>propolis extraction</label>
+        <tab>Bees</tab>
+        <techLevel>Medieval</techLevel>
+        <description>Learn how to have a chance of harvesting a medicinal bee product during honey harvest. Propolis has antibacterial, antiviral and anti-inflammatory properties.</description>
+        <baseCost>500</baseCost>
+        <prerequisites>
+            <li>Bees_Beekeeping</li>
+        </prerequisites>
+        <researchViewX>1</researchViewX>
+        <researchViewY>1</researchViewY>
+    </ResearchProjectDef>    
+
+</Defs>

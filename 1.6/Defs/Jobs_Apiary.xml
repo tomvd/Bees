@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+      <!-- ============= TakeHoneyOutOfBeehive ============= -->
+
+      <WorkGiverDef>
+        <defName>Bees_TakeHoneyOutOfBeehive</defName>
+        <label>take honey out of Beehive</label>
+        <giverClass>Bees.WorkGiver_TakeHoneyOutOfBeehive</giverClass>
+        <workType>Handling</workType>
+        <verb>take honey</verb>
+        <gerund>taking honey from</gerund>
+        <priorityInType>20</priorityInType>
+        <requiredCapacities>
+            <li>Manipulation</li>
+        </requiredCapacities>
+    </WorkGiverDef>
+
+
+  <JobDef>
+    <defName>Bees_TakeHoneyOutOfBeehive</defName>
+    <driverClass>Bees.JobDriver_TakeHoneyOutOfBeehive</driverClass>
+    <reportString>taking honey out of TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  
+    <!-- ============= TendToTheBeehive ============= -->
+
+    <WorkGiverDef>
+      <defName>Bees_TendToBeehive</defName>
+      <label>tend to the Beehive</label>
+      <giverClass>Bees.WorkGiver_TendToBeehive</giverClass>
+      <workType>Handling</workType>
+      <verb>tend Beehive</verb>
+      <gerund>tend to</gerund>
+      <priorityInType>20</priorityInType>
+      <requiredCapacities>
+          <li>Manipulation</li>
+      </requiredCapacities>
+  </WorkGiverDef>
+
+  <JobDef>
+    <defName>Bees_TendToBeehive</defName>
+    <driverClass>Bees.JobDriver_TendToBeehive</driverClass>
+    <reportString>tending to TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  <!-- ============= FermentingBarrel ============= -->
+  <WorkGiverDef>
+    <defName>Bees_FillMeadFermentingBarrel</defName>
+    <label>fill fermenting barrels</label>
+    <giverClass>Bees.WorkGiver_FillMeadFermentingBarrel</giverClass>
+    <workType>Hauling</workType>
+    <verb>fill</verb>
+    <gerund>filling</gerund>
+    <priorityInType>19</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <canBeDoneByMechs>false</canBeDoneByMechs>
+  </WorkGiverDef>  
+  <JobDef>
+    <defName>Bees_FillMeadFermentingBarrel</defName>
+    <driverClass>Bees.JobDriver_FillMeadFermentingBarrel</driverClass>
+    <reportString>filling TargetA.</reportString>
+    <suspendable>false</suspendable>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+
+  <WorkGiverDef>
+    <defName>Bees_TakeMeadOutOfFermentingBarrel</defName>
+    <label>take mead out of fermenting barrels</label>
+    <giverClass>Bees.WorkGiver_TakeMeadOutOfFermentingBarrel</giverClass>
+    <workType>Hauling</workType>
+    <verb>take mead</verb>
+    <gerund>taking mead from</gerund>
+    <priorityInType>20</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <canBeDoneByMechs>false</canBeDoneByMechs>
+  </WorkGiverDef>
+  
+  <JobDef>
+    <defName>Bees_TakeMeadOutOfFermentingBarrel</defName>
+    <driverClass>Bees.JobDriver_TakeMeadOutOfFermentingBarrel</driverClass>
+    <reportString>taking mead out of TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+  
+  
+</Defs>

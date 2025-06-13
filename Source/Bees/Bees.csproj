@@ -45,7 +45,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Krafs.Rimworld.Ref" Version="1.5.4039-beta" GeneratePathProperty="true" />
+        <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.4489-beta" GeneratePathProperty="true" />
         <!-- Use Version="*-*" to get the latest beta! -->
     </ItemGroup>
     <ItemGroup>

@@ -53,7 +53,7 @@
             },
             "Krafs.Rimworld.Ref": {
               "target": "Package",
-              "version": "[1.5.4039-beta, )",
+              "version": "[1.6.4489-beta, )",
               "generatePathProperty": true
             }
           },

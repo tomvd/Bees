@@ -7,10 +7,12 @@
 	<supportedVersions>
 		<li>1.4</li>
 		<li>1.5</li>
+		<li>1.6</li>
 	</supportedVersions>
 	<description>
 		Build hives. Attract bees. Profit!
 	</description>
+	<modIconPath IgnoreIfNoMatchingField="True">BeesModIcon</modIconPath>
 	<incompatibleWith>
 		<li>sarg.rimbees</li>
 		<li>Haplo.Miscellaneous.BeesNHoney</li>
