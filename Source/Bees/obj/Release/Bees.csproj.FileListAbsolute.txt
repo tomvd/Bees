@@ -4,3 +4,4 @@ C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Bees\Source\Bees\obj
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Bees\Source\Bees\obj\Release\Bees.csproj.CoreCompileInputs.cache
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Bees\Source\Bees\obj\Release\Bees.dll
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Bees\1.5\Assemblies\Bees.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Bees\1.6\Assemblies\Bees.dll

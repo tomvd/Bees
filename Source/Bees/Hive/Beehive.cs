@@ -175,7 +175,7 @@ public class Beehive : Building
         {
             Thing propolis = ThingMaker.MakeThing(InternalDefOf.Bees_Propolis, null);
             propolis.stackCount = Rand.Chance(0.25f)?2:1;            
-            GenPlace.TryPlaceThing(propolis, this.Position, base.Map, ThingPlaceMode.Near, null, null);
+            GenPlace.TryPlaceThing(propolis, this.Position, base.Map, ThingPlaceMode.Near);
         }
         return thing;
     }

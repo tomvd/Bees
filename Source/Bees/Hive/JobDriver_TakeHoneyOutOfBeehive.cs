@@ -10,31 +10,20 @@ public class JobDriver_TakeHoneyOutOfBeehive : JobDriver
         private float workLeft;
 
         private float totalNeededWork;
-        private const TargetIndex BarrelInd = TargetIndex.A;
-        private const TargetIndex MeadToHaulInd = TargetIndex.B;
-        private const TargetIndex StorageCellInd = TargetIndex.C;
 
-        protected Beehive Beehive
-        {
-            get
-            {
-                return (Beehive)this.job.GetTarget(TargetIndex.A).Thing;
-            }
-        }
+        private Beehive Beehive => (Beehive)job.GetTarget(TargetIndex.A).Thing;
 
         protected Thing Honey
         {
             get
             {
-                return this.job.GetTarget(TargetIndex.B).Thing;
+                return job.GetTarget(TargetIndex.B).Thing;
             }
         }
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            Pawn pawn = this.pawn;
-            LocalTargetInfo target = this.Beehive;
-            Job job = this.job;
+            LocalTargetInfo target = Beehive;
             return pawn.Reserve(target, job, 1, -1, null, errorOnFailed);
         }
 
@@ -43,7 +32,7 @@ public class JobDriver_TakeHoneyOutOfBeehive : JobDriver
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
             this.FailOnBurningImmobile(TargetIndex.A);
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
-            Toil doWork = ToilMaker.MakeToil("MakeNewToils").FailOnDestroyedNullOrForbidden(TargetIndex.A).FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
+            Toil doWork = ToilMaker.MakeToil().FailOnDestroyedNullOrForbidden(TargetIndex.A).FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
             doWork.initAction = delegate
             {
                 totalNeededWork = 500;
@@ -68,30 +57,29 @@ public class JobDriver_TakeHoneyOutOfBeehive : JobDriver
             doWork.PlaySustainerOrSound(() => InternalDefOf.Bees_Beehive_Ambience);
             doWork.activeSkill = () => SkillDefOf.Animals;
             yield return doWork;
-            Toil toil = ToilMaker.MakeToil("MakeNewToils");
+            var toil = ToilMaker.MakeToil();
             toil.initAction = delegate
             {
-                Thing thing = this.Beehive.TakeOutHoney();
-                GenPlace.TryPlaceThing(thing, this.pawn.Position, base.Map, ThingPlaceMode.Near, null, null);
+                Thing thing = Beehive.TakeOutHoney();
+                GenPlace.TryPlaceThing(thing, pawn.Position, Map, ThingPlaceMode.Near);
                 StoragePriority currentPriority = StoreUtility.CurrentStoragePriorityOf(thing);
-                IntVec3 c;
-                if (StoreUtility.TryFindBestBetterStoreCellFor(thing, this.pawn, base.Map, currentPriority, this.pawn.Faction, out c, true))
+                if (StoreUtility.TryFindBestBetterStoreCellFor(thing, pawn, Map, currentPriority, pawn.Faction, out var c))
                 {
-                    this.job.SetTarget(TargetIndex.C, c);
-                    this.job.SetTarget(TargetIndex.B, thing);
-                    this.job.count = thing.stackCount;
+                    job.SetTarget(TargetIndex.C, c);
+                    job.SetTarget(TargetIndex.B, thing);
+                    job.count = thing.stackCount;
                 }
                 else
                 {
-                    base.EndJobWith(JobCondition.Incompletable);
+                    EndJobWith(JobCondition.Incompletable);
                 }
             };
             toil.defaultCompleteMode = ToilCompleteMode.Instant;
             yield return toil;
-            yield return Toils_Reserve.Reserve(TargetIndex.B, 1, -1, null);
-            yield return Toils_Reserve.Reserve(TargetIndex.C, 1, -1, null);
+            yield return Toils_Reserve.Reserve(TargetIndex.B);
+            yield return Toils_Reserve.Reserve(TargetIndex.C);
             yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.ClosestTouch);
-            yield return Toils_Haul.StartCarryThing(TargetIndex.B, false, false, false);
+            yield return Toils_Haul.StartCarryThing(TargetIndex.B);
             Toil carryToCell = Toils_Haul.CarryHauledThingToCell(TargetIndex.C);
             yield return carryToCell;
             yield return Toils_Haul.PlaceHauledThingInCell(TargetIndex.C, carryToCell, true);

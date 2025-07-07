@@ -8,26 +8,13 @@ namespace Bees
 {
     class WorkGiver_TendToBeehive : WorkGiver_Scanner
     {
-        public override ThingRequest PotentialWorkThingRequest
-        {
-            get
-            {
-                return ThingRequest.ForDef(InternalDefOf.Bees_Beehive);
-            }
-        }
+        public override ThingRequest PotentialWorkThingRequest => ThingRequest.ForDef(InternalDefOf.Bees_Beehive);
 
-        public override PathEndMode PathEndMode
-        {
-            get
-            {
-                return PathEndMode.Touch;
-            }
-        }
+        public override PathEndMode PathEndMode => PathEndMode.Touch;
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            Beehive tNR_Apiary = t as Beehive;
-            if (tNR_Apiary == null || !tNR_Apiary.needTend)
+            if (t is not Beehive { needTend: true })
             {
                 return false;
             }

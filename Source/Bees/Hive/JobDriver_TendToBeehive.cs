@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Bees;
+﻿using System.Collections.Generic;
+using RimWorld;
 using Verse;
 using Verse.AI;
-using RimWorld;
 
 namespace Bees
 {
@@ -12,17 +10,12 @@ namespace Bees
         private float workLeft;
 
         private float totalNeededWork;
-        
-        protected Beehive Beehive
-        {
-            get { return (Beehive)this.job.GetTarget(TargetIndex.A).Thing; }
-        }
+
+        private Beehive Beehive => (Beehive)job.GetTarget(TargetIndex.A).Thing;
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            Pawn pawn = this.pawn;
-            LocalTargetInfo target = this.Beehive;
-            Job job = this.job;
+            LocalTargetInfo target = Beehive;
             return pawn.Reserve(target, job, 1, -1, null, errorOnFailed);
         }
 
@@ -31,7 +24,7 @@ namespace Bees
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
             this.FailOnBurningImmobile(TargetIndex.A);
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
-            Toil doWork = ToilMaker.MakeToil("MakeNewToils").FailOnDestroyedNullOrForbidden(TargetIndex.A).FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
+            Toil doWork = ToilMaker.MakeToil().FailOnDestroyedNullOrForbidden(TargetIndex.A).FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
             doWork.initAction = delegate
             {
                 totalNeededWork = 500;
@@ -56,10 +49,10 @@ namespace Bees
             doWork.PlaySustainerOrSound(() => InternalDefOf.Bees_Beehive_Ambience);
             doWork.activeSkill = () => SkillDefOf.Animals;
             yield return doWork;
-            Toil toil = ToilMaker.MakeToil("MakeNewToils");
+            Toil toil = ToilMaker.MakeToil();
             toil.initAction = delegate
             {
-                int skill = pawn.skills.skills.Find((SkillRecord r) => r.def.defName == "Animals").levelInt / 2;
+                int skill = pawn.skills.skills.Find(r => r.def.defName == "Animals").levelInt / 2;
                 if (Rand.RangeInclusive(0, 11 - skill) <= 5)
                 {
                     Beehive.Heal();

@@ -10,9 +10,8 @@ public class Placeworker_Beehive : PlaceWorker
         foreach (IntVec3 c in GenAdj.OccupiedRect(center, rot, def.Size).ExpandedBy(1))
         {
             List<Thing> list = map.thingGrid.ThingsListAt(c);
-            for (int i = 0; i < list.Count; i++)
+            foreach (var thing2 in list)
             {
-                Thing thing2 = list[i];
                 if (thing2 != thingToIgnore && ((thing2.def.category == ThingCategory.Building && thing2.def.defName == "Bees_Beehive") || ((thing2.def.IsBlueprint || thing2.def.IsFrame) && thing2.def.entityDefToBuild is ThingDef && ((ThingDef)thing2.def.entityDefToBuild).defName == "Bees_Beehive")))
                 {
                     return "APlaceWorker".Translate();

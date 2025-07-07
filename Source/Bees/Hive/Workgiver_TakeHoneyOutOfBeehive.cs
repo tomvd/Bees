@@ -6,26 +6,14 @@ namespace Bees;
 
 public class Workgiver_TakeHoneyOutOfBeehive : WorkGiver_Scanner
 {
-    public override ThingRequest PotentialWorkThingRequest
-    {
-        get
-        {
-            return ThingRequest.ForDef(InternalDefOf.Bees_Beehive);
-        }
-    }
+    public override ThingRequest PotentialWorkThingRequest => ThingRequest.ForDef(InternalDefOf.Bees_Beehive);
 
-    public override PathEndMode PathEndMode
-    {
-        get
-        {
-            return PathEndMode.Touch;
-        }
-    }
+    public override PathEndMode PathEndMode => PathEndMode.Touch;
 
     public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
     {
         Beehive beehive = t as Beehive;
-        int skill = pawn.skills.skills.Find((SkillRecord r) => r.def.defName == "Animals").levelInt;
+        int skill = pawn.skills.skills.Find(r => r.def.defName == "Animals").levelInt;
         if (beehive == null || !beehive.HoneyReady || skill < 5)
         {
             return false;
