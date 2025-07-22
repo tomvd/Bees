@@ -39,6 +39,20 @@
         </prerequisites>
         <researchViewX>1</researchViewX>
         <researchViewY>1</researchViewY>
-    </ResearchProjectDef>    
+    </ResearchProjectDef>
+
+    <ResearchProjectDef>
+        <defName>Bees_HiveSplitting</defName>
+        <label>hive splitting</label>
+        <tab>Bees</tab>
+        <techLevel>Medieval</techLevel>
+        <description>Learn how to split your hive to get more bees for new hives.</description>
+        <baseCost>600</baseCost>
+        <prerequisites>
+            <li>Bees_Beekeeping</li>
+        </prerequisites>
+        <researchViewX>1</researchViewX>
+        <researchViewY>2</researchViewY>
+    </ResearchProjectDef>
 
 </Defs>

@@ -23,6 +23,27 @@
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
 
+  <!-- ============= SplitBeehive ============= -->
+
+  <WorkGiverDef>
+    <defName>Bees_SplitBeehive</defName>
+    <label>split the beehive</label>
+    <giverClass>Bees.WorkGiver_SplitBeehive</giverClass>
+    <workType>Handling</workType>
+    <verb>split</verb>
+    <gerund>split</gerund>
+    <priorityInType>20</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+  </WorkGiverDef>
+
+  <JobDef>
+    <defName>Bees_SplitBeehive</defName>
+    <driverClass>Bees.JobDriver_SplitBeehive</driverClass>
+    <reportString>splitting TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
   
     <!-- ============= TendToTheBeehive ============= -->
 

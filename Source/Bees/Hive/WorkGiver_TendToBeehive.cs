@@ -14,7 +14,7 @@ namespace Bees
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            if (t is not Beehive { needTend: true })
+            if (t is not Beehive { NeedTend: true })
             {
                 return false;
             }

@@ -2,7 +2,8 @@
 <LanguageData>
     <ContainsHoney>Contains honey</ContainsHoney>
     <ContainsMead>Contains mead</ContainsMead>
-    <ForceHoneyHarvest>Force honey harvest</ForceHoneyHarvest>
+    <ForceHoneyHarvest>Harvest honey</ForceHoneyHarvest>
+    <SplitHive>Split hive</SplitHive>
     <HiveInspectSize>Size: </HiveInspectSize>
     <HiveInspectPlants>Plants: </HiveInspectPlants>
     <HiveInspectActive>Active: </HiveInspectActive>

@@ -17,10 +17,16 @@ public class Beehive : Building
     private bool unhealthy;
     private bool toomany;
     private bool forceHoneyRemoval;
+    private bool markedForSplitting;
 
-    private static float honeyPerTenthHour = 0.05f; // amount of honey a perfect hive makes per 1/10 of an hour - 0.5/h on 12h/day active means 6 honey/day or a full stack for a season
-    private static float growthPerTenthHour = 0.002f; // how much a hive grows per 1/10th of an hour when active - 2%/h on 12h/day active means full hive in about 4-5 days
-    private static float plantGrowthMultiplier = 0.5f; // 0f is normal growth, 1f is twice the growth
+    public bool MarkedForSplitting
+    {
+        get => markedForSplitting;
+    }
+
+    private const float HoneyPerTenthHour = 0.05f; // amount of honey a perfect hive makes per 1/10 of an hour - 0.5/h on 12h/day active means 6 honey/day or a full stack for a season
+    private const float GrowthPerTenthHour = 0.002f; // how much a hive grows per 1/10th of an hour when active - 2%/h on 12h/day active means full hive in about 4-5 days
+    private static readonly float PlantGrowthMultiplier = 0.5f; // 0f is normal growth, 1f is twice the growth
     
     
     public bool HoneyReady
@@ -31,7 +37,7 @@ public class Beehive : Building
         }
     }
 
-    public bool needTend
+    public bool NeedTend
     {
         get
         {
@@ -42,15 +48,16 @@ public class Beehive : Building
     public override void ExposeData()
     {
         base.ExposeData();
-        Scribe_Values.Look(ref this.flowerPercentage, "flowerPercentage", 0, false);
-        Scribe_Values.Look(ref this.size, "size", 0, false);
-        Scribe_Values.Look(ref this.honeyAmount, "honeyAmount", 0, false);
-        Scribe_Values.Look(ref this.active, "active", false, false);
-        Scribe_Values.Look(ref this.inactiveReason, "inactiveReason", "", false);
-        Scribe_Values.Look(ref this.hoursInactive, "hoursInactive", 0, false);
-        Scribe_Values.Look(ref this.unhealthy, "unhealthy", false, false);
-        Scribe_Values.Look(ref this.toomany, "toomany", false, false);
-        Scribe_Values.Look(ref this.forceHoneyRemoval, "forceHoneyRemoval", false, false);
+        Scribe_Values.Look(ref this.flowerPercentage, "flowerPercentage");
+        Scribe_Values.Look(ref this.size, "size");
+        Scribe_Values.Look(ref this.honeyAmount, "honeyAmount");
+        Scribe_Values.Look(ref this.active, "active");
+        Scribe_Values.Look(ref this.inactiveReason, "inactiveReason", "");
+        Scribe_Values.Look(ref this.hoursInactive, "hoursInactive");
+        Scribe_Values.Look(ref this.unhealthy, "unhealthy");
+        Scribe_Values.Look(ref this.toomany, "toomany");
+        Scribe_Values.Look(ref this.forceHoneyRemoval, "forceHoneyRemoval");
+        Scribe_Values.Look(ref this.markedForSplitting, "markedForSplitting");
     }
 
     /*
@@ -59,27 +66,28 @@ public class Beehive : Building
     public override void TickRare()
     {
         base.TickRare();
+        if (Map is null) return; // beehive is not spawned
         RecalculateFlowerPercentage();
         RecalculateActive();
         if (!unhealthy)
             unhealthy = Rand.Chance(0.0001f);
         if (active)
         {
-            honeyAmount += flowerPercentage * size * (toomany?honeyPerTenthHour/2f:honeyPerTenthHour);
+            honeyAmount += flowerPercentage * size * (toomany?HoneyPerTenthHour/2f:HoneyPerTenthHour);
             honeyAmount = Mathf.Clamp(honeyAmount, 0.0f, 75.0f);
             if (!unhealthy)
-                size += (toomany?growthPerTenthHour/2f:growthPerTenthHour);
+                size += (toomany?GrowthPerTenthHour/2f:GrowthPerTenthHour);
         }
         else
         {
             hoursInactive += 0.1f;
             if (hoursInactive > 12f)
             {
-                honeyAmount -= honeyPerTenthHour/20f;
+                honeyAmount -= HoneyPerTenthHour/20f;
                 honeyAmount = Mathf.Clamp(honeyAmount, 0.0f, 75.0f);
                 if (honeyAmount < 0.01f)
                 {
-                    size -= growthPerTenthHour/20f;
+                    size -= GrowthPerTenthHour/20f;
                 }
             }
         }
@@ -166,34 +174,55 @@ public class Beehive : Building
         if (Mathf.FloorToInt(honeyAmount) < 1)
         {
             Log.Warning("Tried to get honey but there is none.");
+            this.Reset();
             return null;
         }
-        Thing thing = ThingMaker.MakeThing(InternalDefOf.Bees_Honey, null);
+        Thing thing = ThingMaker.MakeThing(InternalDefOf.Bees_Honey);
         thing.stackCount = Mathf.FloorToInt(honeyAmount);
-        this.Reset();
+        Reset();
         if (InternalDefOf.Bees_PropolisExtraction.IsFinished && Rand.Chance(0.5f))
         {
-            Thing propolis = ThingMaker.MakeThing(InternalDefOf.Bees_Propolis, null);
+            Thing propolis = ThingMaker.MakeThing(InternalDefOf.Bees_Propolis);
             propolis.stackCount = Rand.Chance(0.25f)?2:1;            
-            GenPlace.TryPlaceThing(propolis, this.Position, base.Map, ThingPlaceMode.Near);
+            GenPlace.TryPlaceThing(propolis, Position, Map, ThingPlaceMode.Near);
         }
         return thing;
+    }
+    
+    public Thing DoSplitHive()
+    {
+        if (Mathf.FloorToInt(size) < 0.9f)
+        {
+            Log.Warning("Size must be 100% to be able to split a hive.");
+            markedForSplitting = false;
+            return null;
+        }
+
+        markedForSplitting = false;
+        size = 0.5f;
+        return ThingMaker.MakeThing(InternalDefOf.Bees_Bees);
+    }
+
+    public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
+    {
+        GenPlace.TryPlaceThing(ThingMaker.MakeThing(InternalDefOf.Bees_Bees), Position, Map, ThingPlaceMode.Near);        
+        base.Destroy(mode);
     }
 
     public void RecalculateFlowerPercentage()
     {
         var flowerCount = 0;
-        var cellsAround = CellsAroundA(this.TrueCenter().ToIntVec3(), this.Map);
+        var cellsAround = CellsAroundA(this.TrueCenter().ToIntVec3(), Map);
         toomany = false;
         foreach (IntVec3 cell in cellsAround)
         {
-            foreach (Thing item in cell.GetThingList(this.Map))
+            foreach (Thing item in cell.GetThingList(Map))
             {
                 if (item is Plant plant)
                 {
                     if (active && !unhealthy)
                     {
-                        plant.growthInt += plant.GrowthPerTick * 250f * plantGrowthMultiplier * size;
+                        plant.growthInt += plant.GrowthPerTick * 250f * PlantGrowthMultiplier * size;
                     }
 
                     if (plant.growthInt >= 0.5f )
@@ -209,7 +238,7 @@ public class Beehive : Building
             }
         }
 
-        flowerPercentage = Mathf.Clamp(flowerCount / ((float)cellsAround.Count - 8.0f), 0f, 1.0f);
+        flowerPercentage = Mathf.Clamp(flowerCount / (cellsAround.Count - 8.0f), 0f, 1.0f);
     }
 
     public List<IntVec3> CellsAroundA(IntVec3 pos, Map map)
@@ -243,13 +272,26 @@ public class Beehive : Building
             {
                 defaultLabel = "ForceHoneyHarvest".Translate(),
                 icon = ContentFinder<Texture2D>.Get($"UI/HarvestHoney"),
-                action = delegate()
+                action = delegate
                 {
-                    this.forceHoneyRemoval = true;
+                    forceHoneyRemoval = true;
                     
                 }
             };
         }
+        
+        if (Mathf.FloorToInt(size) >= 1 && !markedForSplitting && InternalDefOf.Bees_HiveSplitting.IsFinished)
+        {
+            yield return new Command_Action
+            {
+                defaultLabel = "SplitHive".Translate(),
+                icon = ContentFinder<Texture2D>.Get($"UI/SplitHive"),
+                action = delegate
+                {
+                    markedForSplitting = true;
+                }
+            };
+        }        
 
         /*
          * TODO gizmo to take out honey now
@@ -259,16 +301,16 @@ public class Beehive : Building
             yield return new Command_Action
             {
                 defaultLabel = "Debug: Set progress to max",
-                action = delegate ()
+                action = delegate
                 {
-                    this.size = 1;
-                    this.honeyAmount = 75;
+                    size = 1;
+                    honeyAmount = 75;
                 }
             };
             yield return new Command_Action
             {
                 defaultLabel = "Debug: increase size",
-                action = delegate ()
+                action = delegate
                 {
                     size += 0.10f;
                     size = Mathf.Clamp(size, 0.0f, 1.0f);
@@ -277,13 +319,12 @@ public class Beehive : Building
             yield return new Command_Action
             {
                 defaultLabel = "Debug: make unhealthy",
-                action = delegate ()
+                action = delegate
                 {
                     unhealthy = true;
                 }
             };            
         }
-        yield break;
     }
 
     public void Heal()

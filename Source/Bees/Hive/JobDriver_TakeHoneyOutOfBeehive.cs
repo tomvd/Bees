@@ -13,13 +13,7 @@ public class JobDriver_TakeHoneyOutOfBeehive : JobDriver
 
         private Beehive Beehive => (Beehive)job.GetTarget(TargetIndex.A).Thing;
 
-        protected Thing Honey
-        {
-            get
-            {
-                return job.GetTarget(TargetIndex.B).Thing;
-            }
-        }
+        protected Thing Honey => job.GetTarget(TargetIndex.B).Thing;
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
@@ -61,6 +55,12 @@ public class JobDriver_TakeHoneyOutOfBeehive : JobDriver
             toil.initAction = delegate
             {
                 Thing thing = Beehive.TakeOutHoney();
+                if (Rand.RangeInclusive(1, 3) == 1)
+                {
+                    pawn.health.AddHediff(InternalDefOf.Bees_Sting);
+                    pawn.needs.mood.thoughts.memories.TryGainMemoryFast(InternalDefOf.Bees_StingMoodDebuff);
+            
+                }                
                 GenPlace.TryPlaceThing(thing, pawn.Position, Map, ThingPlaceMode.Near);
                 StoragePriority currentPriority = StoreUtility.CurrentStoragePriorityOf(thing);
                 if (StoreUtility.TryFindBestBetterStoreCellFor(thing, pawn, Map, currentPriority, pawn.Faction, out var c))

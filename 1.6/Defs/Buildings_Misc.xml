@@ -29,19 +29,22 @@
 		<canOverlapZones>false</canOverlapZones>
 		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
 		<statBases>
-			<MaxHitPoints>200</MaxHitPoints>
-			<WorkToBuild>3000</WorkToBuild>
-			<Flammability>0.5</Flammability>
-			<Mass>20</Mass>
+			<WorkToBuild>600</WorkToBuild>
+			<Mass>10</Mass>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Flammability>1.0</Flammability>
 		</statBases>
+		<constructEffect>ConstructWood</constructEffect>
 		<building>
-			<paintable>true</paintable>
+			<buildingTags>
+				<li>Production</li>
+			</buildingTags>
+			<destroySound>BuildingDestroyed_Wood_Small</destroySound>
 		</building>
-		<stuffCategories>
-			<li>Woody</li>
-			<li>Stony</li>
-		</stuffCategories>
-		<costStuffCount>90</costStuffCount>
+		<costList>
+			<Bees_Bees>1</Bees_Bees>
+			<WoodLog>30</WoodLog>
+		</costList>
 		<holdsRoof>false</holdsRoof>
 		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
 		<uiIconScale>0.6</uiIconScale>
@@ -58,4 +61,46 @@
 			</li>
 		</comps>
 	</ThingDef>
+
+	<ThingDef ParentName="BuildingNaturalBase">
+		<defName>Bees_Wildhive</defName>
+		<label>wild beehive</label>
+		<description>A hive of wild honeybees. When destroyed (not deconstructed) it yields bees to start beekeeping.</description>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Natural/WildHive</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<drawSize>1.6</drawSize>
+		</graphicData>
+		<uiIconScale>0.65</uiIconScale>
+		<altitudeLayer>Building</altitudeLayer>
+		<rotatable>false</rotatable>
+		<fillPercent>0.5</fillPercent>
+		<statBases>
+			<MaxHitPoints>130</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+		</statBases>
+		<pathCost>42</pathCost>
+		<receivesSignals>true</receivesSignals>
+		<blockWind>true</blockWind>
+		<tickerType>Normal</tickerType>
+		<passability>PassThroughOnly</passability>
+		<killedLeavings>
+			<Bees_Bees>1</Bees_Bees>
+			<Bees_Honey>2</Bees_Honey>
+		</killedLeavings>
+		<building>
+			<deconstructible>false</deconstructible>
+		</building>
+		<comps>
+			<li Class="CompProperties_SelfhealHitpoints">
+				<ticksPerHeal>6000</ticksPerHeal> <!-- 60k ticks = 1 day, 10 hp per day -->
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<heatPerSecond>6</heatPerSecond>
+				<heatPushMaxTemperature>38</heatPushMaxTemperature>
+			</li>
+		</comps>
+	</ThingDef>
+	
 </Defs>

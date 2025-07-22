@@ -29,4 +29,29 @@
         </thingCategories>
     </ThingDef>
 
+    <ThingDef ParentName="ResourceBase">
+        <defName>Bees_Bees</defName>
+        <label>bees</label>
+        <description>A small colony of bees and a queen. Can be sold or used to start your own hive.</description>
+        <graphicData>
+            <texPath>Things/Item/Bees</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+            <drawSize>(0.75, 0.75)</drawSize>
+        </graphicData>
+        <resourceReadoutPriority>Middle</resourceReadoutPriority>
+        <stackLimit>5</stackLimit>
+        <useHitPoints>true</useHitPoints>
+        <rotatable>false</rotatable>
+        <tickerType>Rare</tickerType>
+        <thingCategories>
+            <li>ItemsMisc</li>
+        </thingCategories>
+        <statBases>
+            <Mass>1.0</Mass>
+            <MaxHitPoints>100</MaxHitPoints>
+            <MarketValue>10</MarketValue>
+            <DeteriorationRate>1</DeteriorationRate>
+        </statBases>
+    </ThingDef>    
+
 </Defs>

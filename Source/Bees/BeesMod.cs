@@ -13,18 +13,22 @@ public static class InternalDefOf
 	}
 	public static ThingDef Bees_Beehive;
 	public static JobDef Bees_TakeHoneyOutOfBeehive;
+	public static JobDef Bees_SplitBeehive;
 	public static JobDef Bees_TendToBeehive;
 	public static HediffDef Bees_Sting;
 	public static ThoughtDef Bees_StingMoodDebuff;
 	public static ThingDef Bees_Honey;
 	public static ThingDef Bees_Propolis;
 	public static ResearchProjectDef Bees_PropolisExtraction;
+	public static ResearchProjectDef Bees_HiveSplitting;
 	public static DamageDef Bees_DamageSting;
 	public static SoundDef Bees_Beehive_Ambience;
 	public static ThingDef Bees_MeadFermentingBarrel;
 	public static JobDef Bees_FillMeadFermentingBarrel;
 	public static JobDef Bees_TakeMeadOutOfFermentingBarrel;
 	public static ThingDef Bees_Mead;
+	public static ThingDef Bees_Bees;
+	public static ThingDef Bees_Wildhive;
 
 }
 

@@ -88,7 +88,7 @@ public class Building_MeadFermentingBarrel : Building
 		get
 		{
 			CompProperties_TemperatureRuinable compProperties = def.GetCompProperties<CompProperties_TemperatureRuinable>();
-			float ambientTemperature = base.AmbientTemperature;
+			float ambientTemperature = AmbientTemperature;
 			if (ambientTemperature < compProperties.minSafeTemperature)
 			{
 				return 0.1f;
@@ -108,8 +108,8 @@ public class Building_MeadFermentingBarrel : Building
 	public override void ExposeData()
 	{
 		base.ExposeData();
-		Scribe_Values.Look(ref honeyCount, "honeyCount", 0);
-		Scribe_Values.Look(ref progressInt, "progress", 0f);
+		Scribe_Values.Look(ref honeyCount, "honeyCount");
+		Scribe_Values.Look(ref progressInt, "progress");
 	}
 
 	public override void TickRare()

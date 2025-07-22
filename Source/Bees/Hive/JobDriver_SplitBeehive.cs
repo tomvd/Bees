@@ -1,17 +1,19 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace Bees
-{
-    class JobDriver_TendToBeehive : JobDriver
+namespace Bees;
+
+public class JobDriver_SplitBeehive : JobDriver
     {
         private float workLeft;
 
         private float totalNeededWork;
 
         private Beehive Beehive => (Beehive)job.GetTarget(TargetIndex.A).Thing;
+
+        protected Thing Honey => job.GetTarget(TargetIndex.B).Thing;
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
@@ -36,7 +38,7 @@ namespace Bees
                 if (pawn.skills != null)
                 {
                     pawn.skills.Learn(SkillDefOf.Animals, 0.1f);
-                }                       
+                }                
                 if (workLeft <= 0f)
                 {
                     //SoundDefOf.Finish_Wood.PlayOneShot(SoundInfo.InMap(Tree));
@@ -49,28 +51,45 @@ namespace Bees
             doWork.PlaySustainerOrSound(() => InternalDefOf.Bees_Beehive_Ambience);
             doWork.activeSkill = () => SkillDefOf.Animals;
             yield return doWork;
-            Toil toil = ToilMaker.MakeToil();
+            var toil = ToilMaker.MakeToil();
             toil.initAction = delegate
             {
-                int skill = pawn.skills.skills.Find(r => r.def.defName == "Animals").levelInt / 2;
-                if (Rand.RangeInclusive(0, 11 - skill) <= 5)
-                {
-                    Beehive.Heal();
-                }
-                else
-                {
-                    MoteMaker.ThrowText(pawn.DrawPos, pawn.Map, "Tending failed", 5f);
-                    pawn.jobs.StartJob(new Job(InternalDefOf.Bees_TendToBeehive, TargetA));
-                }
+                Thing thing = Beehive.DoSplitHive();
                 if (Rand.RangeInclusive(1, 2) == 1)
                 {
                     pawn.health.AddHediff(InternalDefOf.Bees_Sting);
                     pawn.needs.mood.thoughts.memories.TryGainMemoryFast(InternalDefOf.Bees_StingMoodDebuff);
             
-                }                
+                }
+                if (thing == null)
+                {
+                    EndJobWith(JobCondition.Incompletable);
+                }
+                else
+                {
+                    GenPlace.TryPlaceThing(thing, pawn.Position, Map, ThingPlaceMode.Near);
+                    StoragePriority currentPriority = StoreUtility.CurrentStoragePriorityOf(thing);
+                    if (StoreUtility.TryFindBestBetterStoreCellFor(thing, pawn, Map, currentPriority, pawn.Faction,
+                            out var c))
+                    {
+                        job.SetTarget(TargetIndex.C, c);
+                        job.SetTarget(TargetIndex.B, thing);
+                        job.count = thing.stackCount;
+                    }
+                    else
+                    {
+                        EndJobWith(JobCondition.Incompletable);
+                    }
+                }
             };
             toil.defaultCompleteMode = ToilCompleteMode.Instant;
             yield return toil;
+            yield return Toils_Reserve.Reserve(TargetIndex.B);
+            yield return Toils_Reserve.Reserve(TargetIndex.C);
+            yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.ClosestTouch);
+            yield return Toils_Haul.StartCarryThing(TargetIndex.B);
+            Toil carryToCell = Toils_Haul.CarryHauledThingToCell(TargetIndex.C);
+            yield return carryToCell;
+            yield return Toils_Haul.PlaceHauledThingInCell(TargetIndex.C, carryToCell, true);
         }
     }
-}
